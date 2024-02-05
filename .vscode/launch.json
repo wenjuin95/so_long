@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/welow/Desktop/github/so_long/so_long1/libft",
+      "program": "/Users/welow/Desktop/github/so_long/so_long1/libft/build/Debug/outDebug"
+    }
+  ]
+}

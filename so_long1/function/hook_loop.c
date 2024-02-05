@@ -1,9 +1,9 @@
-#include "./minilibx-linux/mlx.h"
-#include <X11/X.h>
-#include <X11/keysym.h>
+// #include "./minilibx-linux/mlx.h"
+// #include <X11/X.h>
+// #include <X11/keysym.h>
+#include <mlx.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include<unistd.h>
+#include "../libft/libft.h"
 
 #define HEIGHT 1000
 #define WIDTH 1000
@@ -20,11 +20,10 @@ int function (int keysym, t_data *data)
 	printf("Pressed %d\n\n", keysym);
 	sleep(1);
 
-	if (keysym == XK_Escape)
+	if (keysym == 53)
 	{
         printf("The %d key (ESC) has been pressed\n\n", keysym);
         mlx_destroy_window(data->mlx, data->mlx_win);
-        mlx_destroy_display(data->mlx);
         free(data->mlx);
         exit(1);
 	}

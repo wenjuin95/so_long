@@ -1,8 +1,9 @@
-#include "./minilibx-linux/mlx.h"
-#include <X11/X.h>
-#include <X11/keysym.h>
+// #include "./minilibx-linux/mlx.h"
+// #include <X11/X.h>
+// #include <X11/keysym.h>
+#include <mlx.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include "../libft/libft.h"
 
 #define HEIGHT 1000
 #define WIDTH 1000
