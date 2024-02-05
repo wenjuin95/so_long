@@ -1,7 +1,8 @@
-//#include "./minilibx-linux/mlx.h"
-#include <mlx.h>
-#include <stdio.h>
-#include "../libft/libft.h"
+// // #include "../minilibx-linux/mlx.h"
+// #include <mlx.h>
+// #include <stdio.h>
+// #include "../libft/libft.h"
+#include "../src/so_long.h"
 
 
 #define HEIGHT 500

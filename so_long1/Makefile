@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: welow <welow@student.42.fr>                +#+  +:+       +#+         #
+#    By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/05 13:38:29 by welow             #+#    #+#              #
-#    Updated: 2024/02/05 14:20:32 by welow            ###   ########.fr        #
+#    Updated: 2024/02/05 23:01:40 by welow            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,17 @@ CC = gcc
 
 CFLAG = -Wall -Wextra -Werror
 
-SRC = src/gif.c 
+SRC = src/so_long.c
+
+INC = src/
 
 OBJ_SRC = $(SRC:.c=.o)
 
-MINILIBX_LIBRARY = -Lminilibx -lmlx -framework OpenGL -framework AppKit
+# MINILIBX_LIBRARY = -Lminilibx -lmlx -framework OpenGL -framework AppKit
+MINILIBX_LIBRARY = -Lminilibx-linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
-MINILIBX = minilibx/
+# MINILIBX = minilibx/
+MINILIBX = minilibx-linux/
 
 all: $(NAME)
 
@@ -30,7 +34,7 @@ $(NAME) : $(OBJ_SRC)
 	make -C $(MINILIBX)
 	make -C libft
 	cp libft/libft.a .
-	$(CC) $(CFLAGS) $(SRC) libft.a $(MINILIBX_LIBRARY) -o $(NAME)
+	$(CC) $(CFLAGS) $(SRC) libft.a $(MINILIBX_LIBRARY) -I$(INC) -o $(NAME)
 
 %.o: %.C
 	$(CC) $(CFLAG) -c $< -o $@
