@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:36:58 by welow             #+#    #+#             */
-/*   Updated: 2024/02/05 23:01:57 by welow            ###   ########.fr       */
+/*   Updated: 2024/02/06 16:40:44 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
 # include "../minilibx-linux/mlx.h"
+
+# define XPM_WIDTH 32
+# define XPM_HEIGHT 32
 
 # define WALL '1'
 # define FLOOR '0'
@@ -43,7 +46,7 @@
 // # define D 100
 // # define A 97
 
-typedef struct	s_data
+typedef struct s_data
 {
 	int		fd;
 	int		heightmap;

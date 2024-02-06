@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+         #
+#    By: welow <welow@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/05 13:38:29 by welow             #+#    #+#              #
-#    Updated: 2024/02/05 23:01:40 by welow            ###   ########.fr        #
+#    Updated: 2024/02/06 16:37:34 by welow            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = so_long
 
 CC = gcc
 
-CFLAG = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 SRC = src/so_long.c
 
@@ -22,11 +22,11 @@ INC = src/
 
 OBJ_SRC = $(SRC:.c=.o)
 
-# MINILIBX_LIBRARY = -Lminilibx -lmlx -framework OpenGL -framework AppKit
-MINILIBX_LIBRARY = -Lminilibx-linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+MINILIBX_LIBRARY = -Lminilibx -lmlx -framework OpenGL -framework AppKit
+# MINILIBX_LIBRARY = -Lminilibx-linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
-# MINILIBX = minilibx/
-MINILIBX = minilibx-linux/
+MINILIBX = minilibx/
+# MINILIBX = minilibx-linux/
 
 all: $(NAME)
 
