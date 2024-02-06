@@ -6,7 +6,7 @@
 #    By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/05 13:38:29 by welow             #+#    #+#              #
-#    Updated: 2024/02/06 21:09:49 by welow            ###   ########.fr        #
+#    Updated: 2024/02/06 21:18:59 by welow            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC = src/so_long.c src/get_image.c src/error_handling.c src/read_map.c
 
-OBJ_SRC = $(SRC:.c=.o)
+OBJ_DIR = temp_obj
+OBJ_SRC = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
 # MINILIBX_LIBRARY = -Lminilibx -lmlx -framework OpenGL -framework AppKit
 MINILIBX_LIBRARY = -Lminilibx-linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
@@ -26,21 +27,24 @@ MINILIBX_LIBRARY = -Lminilibx-linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -l
 # MINILIBX = minilibx/
 MINILIBX = minilibx-linux/
 
-all: $(NAME)
+all: $(OBJ_DIR) $(NAME)
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 $(NAME) : $(OBJ_SRC)
 	make -C $(MINILIBX)
 	make -C libft
 	cp libft/libft.a .
-	$(CC) $(CFLAGS) $(SRC) libft.a $(MINILIBX_LIBRARY) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ_SRC) libft.a $(MINILIBX_LIBRARY) -o $(NAME)
 
-%.o: %.C
-	$(CC) $(CFLAG) -c $< -o $@
+$(OBJ_DIR)/%.o: src/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	make clean -C libft
 	make clean -C $(MINILIBX)
-	rm -f $(OBJ_SRC)
+	rm -rf $(OBJ_DIR)
 	rm -f libft.a
 
 fclean : clean
