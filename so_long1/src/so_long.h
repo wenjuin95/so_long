@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:36:58 by welow             #+#    #+#             */
-/*   Updated: 2024/02/06 16:40:44 by welow            ###   ########.fr       */
+/*   Updated: 2024/02/06 20:36:29 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
 # include "../minilibx-linux/mlx.h"
+# include <stdbool.h>
 
 # define XPM_WIDTH 32
 # define XPM_HEIGHT 32
@@ -69,6 +70,19 @@ typedef struct s_data
 	void	*mlx;
 	void	*win;
 }			t_data;
+
+//check error
+void	check_error(int ac, char **av);
+bool	check_format(char *av);
+
+//read the map for image
+int		get_width_lenght(char *str);
+int		add_line(t_data *game, char *line);
+int		read_map_content(t_data *game, char **av);
+
+//get image for win
+void	place_xpm_to_image(t_data *game);
+void	put_to_win(t_data *game);
 
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: welow <welow@student.42.fr>                +#+  +:+       +#+         #
+#    By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/05 13:38:29 by welow             #+#    #+#              #
-#    Updated: 2024/02/06 16:37:34 by welow            ###   ########.fr        #
+#    Updated: 2024/02/06 21:09:49 by welow            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,19 +14,17 @@ NAME = so_long
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror
 
-SRC = src/so_long.c
-
-INC = src/
+SRC = src/so_long.c src/get_image.c src/error_handling.c src/read_map.c
 
 OBJ_SRC = $(SRC:.c=.o)
 
-MINILIBX_LIBRARY = -Lminilibx -lmlx -framework OpenGL -framework AppKit
-# MINILIBX_LIBRARY = -Lminilibx-linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+# MINILIBX_LIBRARY = -Lminilibx -lmlx -framework OpenGL -framework AppKit
+MINILIBX_LIBRARY = -Lminilibx-linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
-MINILIBX = minilibx/
-# MINILIBX = minilibx-linux/
+# MINILIBX = minilibx/
+MINILIBX = minilibx-linux/
 
 all: $(NAME)
 
@@ -34,7 +32,7 @@ $(NAME) : $(OBJ_SRC)
 	make -C $(MINILIBX)
 	make -C libft
 	cp libft/libft.a .
-	$(CC) $(CFLAGS) $(SRC) libft.a $(MINILIBX_LIBRARY) -I$(INC) -o $(NAME)
+	$(CC) $(CFLAGS) $(SRC) libft.a $(MINILIBX_LIBRARY) -o $(NAME)
 
 %.o: %.C
 	$(CC) $(CFLAG) -c $< -o $@
