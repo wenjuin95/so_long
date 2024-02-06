@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <stdio.h>
+# include <stdarg.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 15
@@ -50,7 +51,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
 char	*ft_strtrim(char const *s1, char const *set);
-int		ft_strcmp(char const *s1, char const *s2);
 
 /* memory */
 void	ft_bzero(void *s, size_t n);
@@ -92,5 +92,15 @@ char	*get_next_line(int fd);
 char	*create_line(int fd, char *line);
 char	*get_only_next_line(char *line);
 char	*new_line(char *line);
+
+/*printf*/
+char	ft_putchar(char c);
+int		ft_putstr(char *str);
+int		ft_putnbr(int n);
+int		ft_putnbr_unsigned(unsigned int nb);
+int		ft_puthexa_lower(unsigned int nb);
+int		ft_puthexa_upper(unsigned int nb);
+int		ft_putaddress(unsigned long long ptr);
+int		ft_printf(const char *format, ...);
 
 #endif

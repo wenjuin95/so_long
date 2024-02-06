@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 20:38:28 by welow             #+#    #+#             */
-/*   Updated: 2024/01/22 20:50:50 by welow            ###   ########.fr       */
+/*   Updated: 2024/01/28 23:04:37 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	*new_line(char *line)
 
 char	*get_next_line(int fd)
 {
-	static char	*line[FOPEN_MAX];
+	static char	*line[1024];
 	char		*next_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line[fd], 0) < 0)
