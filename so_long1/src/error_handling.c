@@ -12,26 +12,70 @@
 
 #include "so_long.h"
 
-bool	check_format(char *av)
+static bool	check_outer_rectangle(t_data *game)
 {
-	int	i;
+    int i, j;
 
-	i = strlen(av) - 4;
-	if (strncmp(&av[i], ".ber", 4) == 0)
-		return (true);
-	return (false);
+    i = 0; 
+	while(i < game->heightmap)
+    {
+        j = 0; 
+		while (j < game->widthmap)
+        {
+            if (i == 0 || i == game->heightmap - 1 || j == 0 || j == game->widthmap - 1)
+            {
+                if (game->map[i][j] != '1')
+                    return false;
+            }
+			j++;
+        }
+		i++;
+    }
+    return true;
 }
 
-void	check_error(int ac, char **av)
+static void	check(t_data *game, int height, int width)
 {
-	if (ac != 2)
+	if (game->map[height][width] == 'P')
+		game->player_count++;
+	if (game->map[height][width] == 'C')
+		game->item_count++;
+	if (game->map[height][width] == 'E')
+		game->exit_count++;
+}
+
+void	check_P_E_C(t_data *game)
+{
+	int height;
+	int width;
+
+	height = 0;
+	while (height < game->heightmap)
 	{
-		ft_printf("Please input map for execute\n");
-		exit(EXIT_FAILURE);
+		width = 0;
+		while (width <= game->widthmap)
+		{
+			check(game, height, width);
+			width++;
+		}
+		height++;
 	}
-	if (ac == 2 && !check_format(av[1]))
+	if (!(game->player_count == 1 && game->item_count > 1
+		&& game->exit_count == 1))
 	{
-		printf("invalid input\n");
-		exit(EXIT_FAILURE);
+		ft_printf("\nERROR\n");
+		ft_printf("player? exit? item?\n\n");
+		free_all(game);
+	}
+}
+
+
+void check_wall(t_data *game)
+{
+	if (check_outer_rectangle(game) == false)
+	{
+		ft_printf("ERROR\n");
+		ft_printf("Map is not surrounded by walls\n");
+		free_all(game);
 	}
 }

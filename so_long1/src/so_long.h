@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:36:58 by welow             #+#    #+#             */
-/*   Updated: 2024/02/06 20:36:29 by welow            ###   ########.fr       */
+/*   Updated: 2024/02/07 15:46:25 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,20 @@
 # define IMG_E "asset/exit.xpm"
 # define IMG_I "asset/item.xpm"
 
-//mac
-# define ESC 53
-# define W 13
-# define S 1
-# define D 2
-# define A 0
+// //mac
+// # define ESC 53
+// # define W 13
+// # define S 1
+// # define D 2
+// # define A 0
 
-// linux
-// # define ESC 65307
-// # define W 119
-// # define S 115
-// # define D 100
-// # define A 97
+//linux
+# define ESC 65307
+# define Q 113
+# define W 119
+# define S 115
+# define D 100
+# define A 97
 
 typedef struct s_data
 {
@@ -53,7 +54,7 @@ typedef struct s_data
 	int		heightmap;
 	int		widthmap;
 	int		player_count;
-	int		column_count;
+	int		item_count;
 	int		exit_count;
 	int		x_axis;
 	int		y_axis;
@@ -72,8 +73,12 @@ typedef struct s_data
 }			t_data;
 
 //check error
-void	check_error(int ac, char **av);
+int 	free_all(t_data *game);
+void	check_input(int ac, char **av);
 bool	check_format(char *av);
+void	check_P_E_C(t_data *game);
+void	check_wall(t_data *game);
+
 
 //read the map for image
 int		get_width_lenght(char *str);
