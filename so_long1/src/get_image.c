@@ -44,6 +44,23 @@ static void	position_player(t_data *game, int width, int height)
 	game->x_axis = width;
 }
 
+static void	image_to_it(t_data *game, int height, int width)
+{
+	if (game->map[height][width] == '1')
+		mlx_put_image_to_window(game->mlx, game->win, game->wall,
+			width * XPM_WIDTH, height * XPM_HEIGHT);
+	if (game->map[height][width] == 'C')
+		position_item(game, width, height);
+	if (game->map[height][width] == 'P')
+		position_player(game, width, height);
+	if (game->map[height][width] == 'E')
+		mlx_put_image_to_window(game->mlx, game->win, game->exit,
+			width * XPM_WIDTH, height * XPM_HEIGHT);
+	if (game->map[height][width] == '0')
+		mlx_put_image_to_window(game->mlx, game->win, game->floor,
+			width * XPM_WIDTH, height * XPM_HEIGHT);
+}
+
 void	put_to_win(t_data *game)
 {
 	int	height;
@@ -56,19 +73,7 @@ void	put_to_win(t_data *game)
 		width = 0;
 		while (width < game->widthmap)
 		{
-			if (game->map[height][width] == '1')
-				mlx_put_image_to_window(game->mlx, game->win, game->wall,
-					width * XPM_WIDTH, height * XPM_HEIGHT);
-			if (game->map[height][width] == 'C')
-				position_item(game, width, height);
-			if (game->map[height][width] == 'P')
-				position_player(game, width, height);
-			if (game->map[height][width] == 'E')
-				mlx_put_image_to_window(game->mlx, game->win, game->exit,
-					width * XPM_WIDTH, height * XPM_HEIGHT);
-			if (game->map[height][width] == '0')
-				mlx_put_image_to_window(game->mlx, game->win, game->floor,
-					width * XPM_WIDTH, height * XPM_HEIGHT);
+			image_to_it(game, height, width);
 			width++;
 		}
 		height++;

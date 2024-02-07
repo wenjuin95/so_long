@@ -14,24 +14,26 @@
 
 static bool	check_outer_rectangle(t_data *game)
 {
-    int i, j;
+	int	i;
+	int	j;
 
-    i = 0; 
-	while(i < game->heightmap)
-    {
-        j = 0; 
+	i = 0;
+	while (i < game->heightmap)
+	{
+		j = 0;
 		while (j < game->widthmap)
-        {
-            if (i == 0 || i == game->heightmap - 1 || j == 0 || j == game->widthmap - 1)
-            {
-                if (game->map[i][j] != '1')
-                    return false;
-            }
+		{
+			if (i == 0 || i == game->heightmap - 1 || j == 0
+				|| j == game->widthmap - 1)
+			{
+				if (game->map[i][j] != '1')
+					return (false);
+			}
 			j++;
-        }
+		}
 		i++;
-    }
-    return true;
+	}
+	return (true);
 }
 
 static void	check(t_data *game, int height, int width)
@@ -44,10 +46,10 @@ static void	check(t_data *game, int height, int width)
 		game->exit_count++;
 }
 
-void	check_P_E_C(t_data *game)
+void	check_p_e_c(t_data *game)
 {
-	int height;
-	int width;
+	int	height;
+	int	width;
 
 	height = 0;
 	while (height < game->heightmap)
@@ -61,16 +63,15 @@ void	check_P_E_C(t_data *game)
 		height++;
 	}
 	if (!(game->player_count == 1 && game->item_count > 1
-		&& game->exit_count == 1))
+			&& game->exit_count == 1))
 	{
 		ft_printf("\nERROR\n");
-		ft_printf("player? exit? item?\n\n");
+		ft_printf("player? exit? item? file exist?\n\n");
 		free_all(game);
 	}
 }
 
-
-void check_wall(t_data *game)
+void	check_wall(t_data *game)
 {
 	if (check_outer_rectangle(game) == false)
 	{

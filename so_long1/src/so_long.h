@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:36:58 by welow             #+#    #+#             */
-/*   Updated: 2024/02/07 15:46:25 by welow            ###   ########.fr       */
+/*   Updated: 2024/02/07 21:19:54 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,22 @@ typedef struct s_data
 	void	*exit;
 	void	*mlx;
 	void	*win;
+
+	int		fps;
+	int		item_pos;
 }			t_data;
 
-//check error
-int 	free_all(t_data *game);
-void	check_input(int ac, char **av);
-bool	check_format(char *av);
-void	check_P_E_C(t_data *game);
-void	check_wall(t_data *game);
+//animation
+int		animation(t_data *game);
 
+//check input
+bool	check_format(char *av);
+int		free_all(t_data *game);
+void	check_input(int ac, char **av);
+
+//check error
+void	check_p_e_c(t_data *game);
+void	check_wall(t_data *game);
 
 //read the map for image
 int		get_width_lenght(char *str);
@@ -89,6 +96,4 @@ int		read_map_content(t_data *game, char **av);
 void	place_xpm_to_image(t_data *game);
 void	put_to_win(t_data *game);
 
-
 #endif
-
