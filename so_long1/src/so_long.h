@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:36:58 by welow             #+#    #+#             */
-/*   Updated: 2024/02/07 21:19:54 by welow            ###   ########.fr       */
+/*   Updated: 2024/02/09 22:16:35 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,18 @@
 
 # define IMG_W "asset/wall.xpm"
 # define IMG_F "asset/floor.xpm"
-# define IMG_P "asset/player_down.xpm"
 # define IMG_E "asset/exit.xpm"
+
 # define IMG_I "asset/item.xpm"
+# define IMG_I2 "asset/item2.xpm"
+# define IMG_I3 "asset/item3.xpm"
+# define IMG_I4 "asset/item4.xpm"
+# define IMG_I5 "asset/item5.xpm"
+
+# define IMG_P "asset/player_down.xpm"
+# define IMG_P_UP "asset/player_up.xpm"
+# define IMG_P_LEFT "asset/player_left.xpm"
+# define IMG_P_RIGHT "asset/player_right.xpm"
 
 // //mac
 // # define ESC 53
@@ -58,7 +67,7 @@ typedef struct s_data
 	int		exit_count;
 	int		x_axis;
 	int		y_axis;
-	int		counter;
+	int		step;
 	int		items;
 
 	char	**map;
@@ -96,4 +105,12 @@ int		read_map_content(t_data *game, char **av);
 void	place_xpm_to_image(t_data *game);
 void	put_to_win(t_data *game);
 
+//key control
+void	image_for_key(t_data *game, int keycode);
+int		control(int keycode, t_data *game);
+int		check_move(t_data *game, int x, int y);
+int		move_up(t_data *game, int keycode);
+int		move_down(t_data *game, int keycode);
+int		move_left(t_data *game, int keycode);
+int		move_right(t_data *game, int keycode);
 #endif

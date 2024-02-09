@@ -17,15 +17,15 @@ void	place_xpm_to_image(t_data *game)
 	int	width;
 	int	height;
 
-	game->floor = mlx_xpm_file_to_image(game->mlx, "asset/floor.xpm",
+	game->floor = mlx_xpm_file_to_image(game->mlx, IMG_F,
 			&width, &height);
-	game->wall = mlx_xpm_file_to_image(game->mlx, "asset/wall.xpm",
+	game->wall = mlx_xpm_file_to_image(game->mlx, IMG_W,
 			&width, &height);
-	game->player = mlx_xpm_file_to_image(game->mlx, "asset/player_down.xpm",
+	game->player = mlx_xpm_file_to_image(game->mlx, IMG_P,
 			&width, &height);
-	game->exit = mlx_xpm_file_to_image(game->mlx, "asset/exit.xpm",
+	game->exit = mlx_xpm_file_to_image(game->mlx, IMG_E,
 			&width, &height);
-	game->item = mlx_xpm_file_to_image(game->mlx, "asset/item.xpm",
+	game->item = mlx_xpm_file_to_image(game->mlx, IMG_I,
 			&width, &height);
 }
 
@@ -46,17 +46,17 @@ static void	position_player(t_data *game, int width, int height)
 
 static void	image_to_it(t_data *game, int height, int width)
 {
-	if (game->map[height][width] == '1')
+	if (game->map[height][width] == WALL)
 		mlx_put_image_to_window(game->mlx, game->win, game->wall,
 			width * XPM_WIDTH, height * XPM_HEIGHT);
-	if (game->map[height][width] == 'C')
+	if (game->map[height][width] == ITEM)
 		position_item(game, width, height);
-	if (game->map[height][width] == 'P')
+	if (game->map[height][width] == PLAYER)
 		position_player(game, width, height);
-	if (game->map[height][width] == 'E')
+	if (game->map[height][width] == EXIT)
 		mlx_put_image_to_window(game->mlx, game->win, game->exit,
 			width * XPM_WIDTH, height * XPM_HEIGHT);
-	if (game->map[height][width] == '0')
+	if (game->map[height][width] == FLOOR)
 		mlx_put_image_to_window(game->mlx, game->win, game->floor,
 			width * XPM_WIDTH, height * XPM_HEIGHT);
 }

@@ -26,7 +26,7 @@ static bool	check_outer_rectangle(t_data *game)
 			if (i == 0 || i == game->heightmap - 1 || j == 0
 				|| j == game->widthmap - 1)
 			{
-				if (game->map[i][j] != '1')
+				if (game->map[i][j] != WALL)
 					return (false);
 			}
 			j++;
@@ -38,11 +38,11 @@ static bool	check_outer_rectangle(t_data *game)
 
 static void	check(t_data *game, int height, int width)
 {
-	if (game->map[height][width] == 'P')
+	if (game->map[height][width] == PLAYER)
 		game->player_count++;
-	if (game->map[height][width] == 'C')
+	if (game->map[height][width] == ITEM)
 		game->item_count++;
-	if (game->map[height][width] == 'E')
+	if (game->map[height][width] == EXIT)
 		game->exit_count++;
 }
 
@@ -62,7 +62,7 @@ void	check_p_e_c(t_data *game)
 		}
 		height++;
 	}
-	if (!(game->player_count == 1 && game->item_count > 1
+	if (!(game->player_count == 1 && game->item_count > 0
 			&& game->exit_count == 1))
 	{
 		ft_printf("\nERROR\n");

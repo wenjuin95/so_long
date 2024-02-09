@@ -19,20 +19,20 @@ void	load_image(t_data *game)
 
 	if (game->item_pos == 0)
 		game->item = mlx_xpm_file_to_image(game->mlx,
-				"asset/item.xpm", &width, &height);
+				IMG_I, &width, &height);
 	else if (game->item_pos == 1)
 		game->item = mlx_xpm_file_to_image(game->mlx,
-				"asset/item2.xpm", &width, &height);
+				IMG_I2, &width, &height);
 	else if (game->item_pos == 2)
 		game->item = mlx_xpm_file_to_image(game->mlx,
-				"asset/item3.xpm", &width, &height);
+				IMG_I3, &width, &height);
 	else if (game->item_pos == 3)
 		game->item = mlx_xpm_file_to_image(game->mlx,
-				"asset/item4.xpm", &width, &height);
+				IMG_I4, &width, &height);
 	else if (game->item_pos == 4)
 	{
 		game->item = mlx_xpm_file_to_image(game->mlx,
-				"asset/item5.xpm", &width, &height);
+				IMG_I5, &width, &height);
 		game->item_pos = -1;
 	}
 }

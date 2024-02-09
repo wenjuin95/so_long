@@ -11,19 +11,6 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
-
-int	control(int keycode, t_data *game)
-{
-	if (keycode == ESC || keycode == Q)
-	{
-		ft_printf("\nYou had quit the game\n\n");
-		mlx_destroy_window(game->mlx, game->win);
-		free(game->mlx);
-		exit(EXIT_SUCCESS);
-	}
-	return (0);
-}
 
 int	main(int ac, char **av)
 {
