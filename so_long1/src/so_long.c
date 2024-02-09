@@ -27,6 +27,7 @@ int	main(int ac, char **av)
 	place_xpm_to_image(&game);
 	put_to_win(&game);
 	mlx_key_hook(game.win, control, &game);
+	// mlx_hook(game.win, 17, 0, (void *)exit, 0);
 	mlx_loop_hook(game.mlx, animation, &game);
 	mlx_loop(game.mlx);
 }

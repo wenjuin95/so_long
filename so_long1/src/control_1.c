@@ -63,7 +63,7 @@ int	control(int keycode, t_data *game)
 {
 	int	executable;
 
-	if (keycode == ESC)
+	if (keycode == ESC || keycode == Q)
 	{
 		ft_printf("\nYou had quit the game\n\n");
 		free_all(game);
