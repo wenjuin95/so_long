@@ -27,6 +27,8 @@ void	place_xpm_to_image(t_data *game)
 			&width, &height);
 	game->item = mlx_xpm_file_to_image(game->mlx, IMG_I,
 			&width, &height);
+	game->enermy = mlx_xpm_file_to_image(game->mlx, IMG_ENE,
+			&width, &height);
 }
 
 static void	position_item(t_data *game, int width, int height)
@@ -58,6 +60,9 @@ static void	image_to_it(t_data *game, int height, int width)
 			width * XPM_WIDTH, height * XPM_HEIGHT);
 	if (game->map[height][width] == FLOOR)
 		mlx_put_image_to_window(game->mlx, game->win, game->floor,
+			width * XPM_WIDTH, height * XPM_HEIGHT);
+	if (game->map[height][width] == ENERMY)
+		mlx_put_image_to_window(game->mlx, game->win, game->enermy,
 			width * XPM_WIDTH, height * XPM_HEIGHT);
 }
 

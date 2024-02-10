@@ -56,6 +56,12 @@ int	check_move(t_data *game, int x, int y)
 		game->step++;
 		game->items--;
 	}
+	if (game->map[y][x] == ENERMY)
+	{
+		ft_printf("\nYou had lost the game\n\n");
+		free_all(game);
+		exit(EXIT_SUCCESS);
+	}
 	return (1);
 }
 
@@ -81,3 +87,4 @@ int	control(int keycode, t_data *game)
 		put_to_win(game);
 	return (1);
 }
+

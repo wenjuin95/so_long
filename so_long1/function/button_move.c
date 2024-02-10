@@ -1,4 +1,4 @@
-//#include "./minilibx-linux/mlx.h"
+// #include "../minilibx-linux/mlx.h"
 #include <mlx.h>
 #include <stdio.h>
 #include "../libft/libft.h"
@@ -57,6 +57,7 @@ int main()
 	data.path = PLAYER_DOWN;
 	data.img = mlx_xpm_file_to_image(data.mlx, data.path, &data.img_width, &data.img_height);
 	mlx_put_image_to_window(data.mlx, data.win, data.img, 250, 250);
-	mlx_key_hook(data.win, button, &data);
+	// mlx_key_hook(data.win, button, &data);
+	mlx_hook(data.win, 2, 1L<<0, button, &data);
 	mlx_loop(data.mlx);
 }

@@ -26,8 +26,8 @@ int	main(int ac, char **av)
 			XPM_WIDTH * game.widthmap, XPM_HEIGHT * game.heightmap, "so_long");
 	place_xpm_to_image(&game);
 	put_to_win(&game);
-	mlx_key_hook(game.win, control, &game);
-	// mlx_hook(game.win, 17, 0, (void *)exit, 0);
+	//02: keypress, (1L << 0): keypressmask
+	mlx_hook(game.win, 02, 1L << 0, control, &game);
 	mlx_loop_hook(game.mlx, animation, &game);
 	mlx_loop(game.mlx);
 }

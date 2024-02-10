@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:36:58 by welow             #+#    #+#             */
-/*   Updated: 2024/02/09 22:16:35 by welow            ###   ########.fr       */
+/*   Updated: 2024/02/10 14:27:57 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@
 # define PLAYER 'P'
 # define EXIT 'E'
 # define ITEM 'C'
+# define ENERMY 'I'
 
 # define IMG_W "asset/wall.xpm"
 # define IMG_F "asset/floor.xpm"
 # define IMG_E "asset/exit.xpm"
+# define IMG_ENE "asset/enermy.xpm"
 
 # define IMG_I "asset/item.xpm"
 # define IMG_I2 "asset/item2.xpm"
@@ -82,6 +84,9 @@ typedef struct s_data
 
 	int		fps;
 	int		item_pos;
+
+	void 	*enermy;
+	int		enermy_count;
 }			t_data;
 
 //animation
