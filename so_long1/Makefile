@@ -6,7 +6,7 @@
 #    By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/05 13:38:29 by welow             #+#    #+#              #
-#    Updated: 2024/02/10 15:45:00 by welow            ###   ########.fr        #
+#    Updated: 2024/02/10 22:49:46 by welow            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = so_long
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 
 SRC = src/so_long.c src/get_image.c src/error_handling.c src/read_map.c src/animation.c \
 	  src/check_input.c src/control_1.c src/control_2.c

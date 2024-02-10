@@ -6,7 +6,7 @@
 /*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:36:58 by welow             #+#    #+#             */
-/*   Updated: 2024/02/10 14:27:57 by welow            ###   ########.fr       */
+/*   Updated: 2024/02/10 22:13:35 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@
 
 # define IMG_W "asset/wall.xpm"
 # define IMG_F "asset/floor.xpm"
-# define IMG_E "asset/exit.xpm"
 # define IMG_ENE "asset/enermy.xpm"
+
+# define IMG_E "asset/exit.xpm"
+# define IMG_E2 "asset/exit2.xpm"
 
 # define IMG_I "asset/item.xpm"
 # define IMG_I2 "asset/item2.xpm"
@@ -62,17 +64,16 @@
 typedef struct s_data
 {
 	int		fd;
+	char	**map;
 	int		heightmap;
 	int		widthmap;
+	int		x_axis;
+	int		y_axis;
 	int		player_count;
 	int		item_count;
 	int		exit_count;
-	int		x_axis;
-	int		y_axis;
 	int		step;
 	int		items;
-
-	char	**map;
 
 	void	*floor;
 	void	*wall;
@@ -82,7 +83,6 @@ typedef struct s_data
 	void	*mlx;
 	void	*win;
 
-	int		fps;
 	int		item_pos;
 
 	void 	*enermy;

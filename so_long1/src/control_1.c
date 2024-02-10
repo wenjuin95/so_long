@@ -32,13 +32,46 @@ void	image_for_key(t_data *game, int keycode)
 				IMG_P_LEFT, &width, &height);
 }
 
+static void	check_enermy(t_data *game, int x, int y)
+{
+	if (game->map[y][x] == ENERMY)
+	{
+		ft_printf("\nYou had lost the game\n\n");
+		free_all(game);
+	}
+}
+
+static void	check_item(t_data *game, int x, int y)
+{
+	int	height;
+	int	width;
+
+	if (game->map[y][x] == ITEM)
+	{
+		game->map[y][x] = PLAYER;
+		game->x_axis = x;
+		game->y_axis = y;
+		game->step++;
+		game->items--;
+		if (game->items == 0)
+		{
+			mlx_destroy_image(game->mlx, game->exit);
+			game->exit = mlx_xpm_file_to_image(game->mlx,
+					IMG_E2, &width, &height);
+		}
+	}
+}
+
+
 int	check_move(t_data *game, int x, int y)
 {
+	check_enermy(game, x, y);
+	check_item(game, x, y);
 	if (game->map[y][x] == EXIT)
 	{
 		if (game->items != 0)
 			return (0);
-		ft_printf("\nYOU WIN!!\n");
+		ft_printf("\nYOU WIN!!\n\n");
 		free_all(game);
 	}
 	if (game->map[y][x] == FLOOR)
@@ -47,20 +80,6 @@ int	check_move(t_data *game, int x, int y)
 		game->x_axis = x;
 		game->y_axis = y;
 		game->step++;
-	}
-	if (game->map[y][x] == ITEM)
-	{
-		game->map[y][x] = PLAYER;
-		game->x_axis = x;
-		game->y_axis = y;
-		game->step++;
-		game->items--;
-	}
-	if (game->map[y][x] == ENERMY)
-	{
-		ft_printf("\nYou had lost the game\n\n");
-		free_all(game);
-		exit(EXIT_SUCCESS);
 	}
 	return (1);
 }

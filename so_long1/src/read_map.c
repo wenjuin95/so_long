@@ -57,7 +57,10 @@ int	read_map_content(t_data *game, char **av)
 	{
 		read = get_next_line(game->fd);
 		if (add_line(game, read) == 0)
+		{
+			free(read);
 			break ;
+		}
 	}
 	close(game->fd);
 	game->widthmap = get_width_lenght(game->map[0]);

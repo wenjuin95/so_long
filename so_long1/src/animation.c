@@ -39,15 +39,42 @@ void	load_image(t_data *game)
 
 int	animation(t_data *game)
 {
-	if (game->fps < 2000)
-	{
-		game->fps++;
-		return (0);
-	}
-	game->fps = 0;
 	mlx_destroy_image(game->mlx, game->item);
 	load_image(game);
-	put_to_win(game);
 	game->item_pos++;
+	usleep(100000);
+	put_to_win(game);
 	return (0);
 }
+
+// int animation(t_data *game) {
+//     static int frame_counter = 0; // Static variable to count frames
+
+//     // Increment frame counter
+//     frame_counter++;
+
+//     // Check if 0.1 second has passed (10 frames at 10 fps)
+//     if (frame_counter == 2000) {
+//         // Reset frame counter
+//         frame_counter = 0;
+        
+//         // Destroy the currently displayed image
+//         mlx_destroy_image(game->mlx, game->item);
+        
+//         // Load the next image and update item_pos
+//         load_image(game);
+//         game->item_pos++;
+        
+//         // Update the window display
+//         put_to_win(game);
+//     }
+    
+//     // Sleep for 0.1 second (100,000 microseconds) to achieve desired frame rate
+//     // usleep(100000);
+
+//     return 0; // Return 0 indicating successful completion
+// }
+
+
+
+
