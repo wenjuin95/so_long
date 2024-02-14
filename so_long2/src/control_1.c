@@ -16,6 +16,7 @@ void	print_step(t_data *game)
 {
 	game->step++;
 	ft_printf("Step: %d\n", game->step);
+	ft_printf("item left: %d\n\n", game->c_count);
 }
 
 void	free_enermy(t_data *game)
@@ -60,8 +61,10 @@ static void	game_key(int keycode, t_data *game)
 int	control(int keycode, t_data *game)
 {
 	if (keycode == ESC || keycode == Q)
+	{
+		ft_printf("\nYOU QUIT\n\n");
 		free_game(game);
-	else if (!game->play)
-		game_key(keycode, game);
+	}
+	game_key(keycode, game);
 	return (0);
 }

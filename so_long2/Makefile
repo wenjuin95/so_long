@@ -6,7 +6,7 @@
 #    By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/05 13:38:29 by welow             #+#    #+#              #
-#    Updated: 2024/02/14 00:00:21 by welow            ###   ########.fr        #
+#    Updated: 2024/02/14 18:07:17 by welow            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,16 +17,22 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 SRC = src/so_long.c src/get_image.c src/error_handling.c src/read_map.c src/init.c \
-	  src/control_1.c src/control_2.c src/gameplay.c
+	  src/control_1.c src/control_2.c src/gameplay.c src/animation.c
 
 OBJ_DIR = temp_obj
 OBJ_SRC = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
-# MINILIBX_LIBRARY = -Lminilibx -lmlx -framework OpenGL -framework AppKit
-MINILIBX_LIBRARY = -Lminilibx-linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+ifeq ($(shell uname), Linux)
+	MINILIBX = minilibx-linux/
+else
+	MINILIBX = minilibx/
+endif
 
-# MINILIBX = minilibx/
-MINILIBX = minilibx-linux/
+ifeq ($(shell uname), Linux)
+	MINILIBX_LIBRARY = -Lminilibx-linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+else
+	MINILIBX_LIBRARY = -Lminilibx -lmlx -framework OpenGL -framework AppKit
+endif
 
 all: $(OBJ_DIR) $(NAME)
 

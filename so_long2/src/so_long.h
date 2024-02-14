@@ -81,25 +81,30 @@ typedef struct s_data
 	int		x_axis;
 	int		y_axis;
 	int		step;
-	int		play;
 	int		item_pos;
 	int		loop;
 }			t_data;
 
+//error handling
 int		check_input(char *av);
 int		check_map(t_data *game);
 void	free_all(char **map);
 
+//read map content
 char	**read_map(char *av);
 
+//initialization
 void	init(t_data *game);
 
-int		put_to_win(t_data *game);
+//image to window
 void	place_xpm_to_image(t_data *game);
+int		put_to_win(t_data *game);
 
+//gameplay
 int		free_game(t_data *game);
 void	gameplay(t_data *game);
 
+//key control
 int		control(int keycode, t_data *game);
 void	free_enermy(t_data *game);
 void	change_exit(t_data *game, int x, int y);
@@ -109,4 +114,8 @@ void	move_up(t_data *game, int keycode);
 void	move_down(t_data *game, int keycode);
 void	move_left(t_data *game, int keycode);
 void	move_right(t_data *game, int keycode);
+
+//animation
+int		animation(t_data *game);
+
 #endif

@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 	{
 		ft_bzero(&game, sizeof(t_data));
 		game.map = read_map(av[1]);
-		if (check_map(&game) && check_input(av[1]))
+		if (game.map && check_map(&game) && check_input(av[1]))
 		{
 			init(&game);
 			gameplay(&game);
