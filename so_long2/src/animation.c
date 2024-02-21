@@ -34,17 +34,29 @@ static void	load_image(t_data *game)
 	}
 }
 
+/*
+1000 threshold value used to determine when the animation loop should perform certain actions.
+
+In this context, it seems to be controlling the duration of each frame of the animation. 
+When game->frame reaches 1000, performs actions such as destroying the previous image, 
+loading a new image, and updating the position of an item in the game window.
+then resets game->frame to 0 for the next frame.
+
+1000 acts as a limit for the number of frames before certain actions are taken to update the animation state. 
+Once this limit is reached, the animation "resets" and starts over from the beginning. 
+djusting this value can control the speed or duration of the animation.
+*/
 int	animation(t_data *game)
 {
-	if (game->loop < 10000)
+	if (game->frame < 1000)
 	{
-		game->loop++;
+		game->frame++;
 		return (0);
 	}
-	game->loop = 0;
 	mlx_destroy_image(game->mlx, game->collect);
 	load_image(game);
 	put_to_win(game);
 	game->item_pos++;
+	game->frame = 0;
 	return (0);
 }

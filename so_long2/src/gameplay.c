@@ -28,6 +28,6 @@ int	free_game(t_data *game)
 
 void	gameplay(t_data *game)
 {
-	mlx_hook(game->win, 2, 1L << 0, control, game);
+	mlx_hook(game->win, 2, 0, control, game);
 	mlx_loop_hook(game->mlx, animation, game);
 }

@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
-# include "../minilibx-linux/mlx.h"
+// # include "../minilibx-linux/mlx.h"
 
 # define XPM_WIDTH 32
 # define XPM_HEIGHT 32
@@ -45,20 +45,21 @@
 # define IMG_P_LEFT "asset/player_left.xpm"
 # define IMG_P_RIGHT "asset/player_right.xpm"
 
-// //mac
-// # define ESC 53
-// # define W 13
-// # define S 1
-// # define D 2
-// # define A 0
+//mac
+# define ESC 53
+# define Q 12
+# define W 13
+# define S 1
+# define D 2
+# define A 0
 
-//linux
-# define ESC 65307
-# define Q 113
-# define W 119
-# define S 115
-# define D 100
-# define A 97
+// //linux
+// # define ESC 65307
+// # define Q 113
+// # define W 119
+// # define S 115
+// # define D 100
+// # define A 97
 
 typedef struct s_data
 {
@@ -82,7 +83,9 @@ typedef struct s_data
 	int		y_axis;
 	int		step;
 	int		item_pos;
-	int		loop;
+	int		frame;
+	int		enermy_x;
+	int		enermy_y;
 }			t_data;
 
 //error handling

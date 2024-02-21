@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+         #
+#    By: welow <welow@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/05 13:38:29 by welow             #+#    #+#              #
-#    Updated: 2024/02/14 18:07:17 by welow            ###   ########.fr        #
+#    Updated: 2024/02/21 16:07:18 by welow            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 SRC = src/so_long.c src/get_image.c src/error_handling.c src/read_map.c src/init.c \
-	  src/control_1.c src/control_2.c src/gameplay.c src/animation.c
+	  src/control_1.c src/control_2.c src/gameplay.c src/animation.c src/enermy.c
 
 OBJ_DIR = temp_obj
 OBJ_SRC = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
