@@ -32,6 +32,11 @@ int	main(int ac, char **av)
 		if (game.map && check_map(&game) && check_input(av[1]))
 		{
 			init(&game);
+			printf("%d\n", game.enermy_count);
+			for (int i = 0; i < game.enermy_count; i++)
+{
+    printf("Enemy %d: x = %d, y = %d\n", i, game.enermies[i].x, game.enermies[i].y);
+}
 			gameplay(&game);
 			mlx_loop(game.mlx);
 		}

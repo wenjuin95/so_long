@@ -30,4 +30,5 @@ void	gameplay(t_data *game)
 {
 	mlx_hook(game->win, 2, 0, control, game);
 	mlx_loop_hook(game->mlx, animation, game);
+	// mlx_loop_hook(game->mlx, enermy_move, game);
 }

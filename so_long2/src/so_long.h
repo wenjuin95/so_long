@@ -61,6 +61,12 @@
 // # define D 100
 // # define A 97
 
+typedef struct s_enermy
+{
+	int		x;
+	int		y;
+}			t_enermy;
+
 typedef struct s_data
 {
 	void	*mlx;
@@ -88,7 +94,10 @@ typedef struct s_data
 	int		enermy_pos;
 	int		enermy_x;
 	int		enermy_y;
+	int		enermy_count;
+	t_enermy	*enermies;
 }			t_data;
+
 
 //error handling
 int		check_input(char *av);
@@ -123,6 +132,6 @@ void	move_right(t_data *game, int keycode);
 //animation
 int		animation(t_data *game);
 
-int		enermy_move(t_data *game);
+// int		enermy_move(t_data *game);
 
 #endif
