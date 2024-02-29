@@ -23,6 +23,41 @@ static void	get_window_size(t_data *game)
 	game->map_height = i * XPM_HEIGHT;
 }
 
+int	flood_fill(t_data *game, int x, int y)
+{
+	int	result;
+
+	result = 0;
+	if (x < 0 || y < 0 || game->map_width <= x || game->map_height <= y)
+		return (0);
+	if (game->map[y][x] == '1' || game->map[y][x] == '7'
+		|| game->map[y][x] == '8')
+		return (0);
+	if (game->map[y][x] == 'P')
+		;
+	if (game->map[y][x] == 'C')
+		game->map[y][x] = '7';
+	if (game->map[y][x] == '0')
+		game->map[y][x] = '8';
+	if (game->map[y][x] == 'E')
+		return (1);
+	result |= flood_fill(game, x + 1, y);
+	result |= flood_fill(game, x - 1, y);
+	result |= flood_fill(game, x, y + 1);
+	result |= flood_fill(game, x, y - 1);
+	return (result);
+}
+
+void	check_exit(t_data *game)
+{
+	if (flood_fill(game, game->x_axis, game->y_axis) == 0)
+	{
+		ft_printf("Error map\n");
+		free_all(game->map);
+		exit(EXIT_FAILURE);
+	}
+}
+
 void	init(t_data *game)
 {
 	game->mlx = mlx_init();
@@ -31,4 +66,5 @@ void	init(t_data *game)
 			"so_long");
 	place_xpm_to_image(game);
 	put_to_win(game);
+	check_exit(game);
 }

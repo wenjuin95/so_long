@@ -73,11 +73,11 @@ static int	check_pec(t_data *game)
 		w = 0;
 		while (game->map[h][w])
 		{
-			if (game->map[h][w] == PLAYER)
+			if (game->map[h][w] == 'P')
 				game->p_count++;
-			if (game->map[h][w] == EXIT)
+			if (game->map[h][w] == 'E')
 				game->e_count++;
-			if (game->map[h][w] == COLLECT)
+			if (game->map[h][w] == 'C')
 				game->c_count++;
 			w++;
 		}

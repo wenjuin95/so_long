@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <assert.h>
 
 void	place_xpm_to_image(t_data *game)
 {
@@ -32,8 +33,16 @@ static void	position_player(t_data *game, int x, int y)
 {
 	mlx_put_image_to_window(game->mlx, game->win, game->player,
 		x * XPM_WIDTH, y * XPM_HEIGHT);
-	game->y_axis = y;
 	game->x_axis = x;
+	game->y_axis = y;
+}
+
+static void	position_enermy(t_data *game, int x, int y)
+{
+	mlx_put_image_to_window(game->mlx, game->win, game->enermy,
+		x * XPM_WIDTH, y * XPM_HEIGHT);
+	game->enermy_x = x;
+	game->enermy_y = y;
 }
 
 static void	image_to_it(t_data *game, int y, int x)
@@ -53,8 +62,7 @@ static void	image_to_it(t_data *game, int y, int x)
 		mlx_put_image_to_window(game->mlx, game->win, game->floor,
 			x * XPM_WIDTH, y * XPM_HEIGHT);
 	else if (game->map[y][x] == ENERMY)
-		mlx_put_image_to_window(game->mlx, game->win, game->enermy,
-			x * XPM_WIDTH, y * XPM_HEIGHT);
+		position_enermy(game, x, y);
 }
 
 int	put_to_win(t_data *game)

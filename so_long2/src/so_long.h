@@ -21,10 +21,10 @@
 # define XPM_HEIGHT 32
 
 # define WALL '1'
-# define FLOOR '0'
+# define FLOOR '8'
 # define PLAYER 'P'
 # define EXIT 'E'
-# define COLLECT 'C'
+# define COLLECT '7'
 # define ENERMY 'I'
 
 # define IMG_W "asset/wall.xpm"
@@ -81,9 +81,11 @@ typedef struct s_data
 	int		e_count;
 	int		x_axis;
 	int		y_axis;
+	int		path;
 	int		step;
 	int		item_pos;
 	int		frame;
+	int		enermy_pos;
 	int		enermy_x;
 	int		enermy_y;
 }			t_data;
@@ -120,5 +122,7 @@ void	move_right(t_data *game, int keycode);
 
 //animation
 int		animation(t_data *game);
+
+int		enermy_move(t_data *game);
 
 #endif
