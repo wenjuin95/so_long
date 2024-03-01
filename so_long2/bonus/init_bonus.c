@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static void	get_window_size(t_data *game)
 {
@@ -31,7 +31,7 @@ int	flood_fill(t_data *game, int x, int y)
 	if (x < 0 || y < 0 || game->map_width <= x || game->map_height <= y)
 		return (0);
 	if (game->map[y][x] == '1' || game->map[y][x] == '7'
-		|| game->map[y][x] == '8')
+		|| game->map[y][x] == '8' || game->map[y][x] == '9')
 		return (0);
 	if (game->map[y][x] == 'P')
 		;
@@ -39,6 +39,8 @@ int	flood_fill(t_data *game, int x, int y)
 		game->map[y][x] = '7';
 	if (game->map[y][x] == '0')
 		game->map[y][x] = '8';
+	if (game->map[y][x] == 'I')
+		game->map[y][x] = '9';
 	if (game->map[y][x] == 'E')
 		return (1);
 	result |= flood_fill(game, x + 1, y);
@@ -67,8 +69,4 @@ void	init(t_data *game)
 	place_xpm_to_image(game);
 	put_to_win(game);
 	check_exit(game);
-	mlx_destroy_image(game->mlx, game->floor);
-	mlx_destroy_image(game->mlx, game->collect);
-	place_xpm_to_image(game);
-	put_to_win(game);
 }

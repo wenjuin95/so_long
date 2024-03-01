@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	image_for_key(t_data *game, int keycode)
 {
@@ -37,6 +37,8 @@ void	move_up(t_data *game, int keycode)
 		ft_printf("\nYOU WIN!!\n\n");
 		free_game(game);
 	}
+	else if (game->map[game->y_axis][game->x_axis] == ENERMY)
+		free_enermy(game);
 	else if (game->map[game->y_axis][game->x_axis] == WALL ||
 			game->map[game->y_axis][game->x_axis] == EXIT)
 		game->y_axis += 1;
@@ -63,6 +65,8 @@ void	move_down(t_data *game, int keycode)
 		ft_printf("\nYOU WIN!!\n\n");
 		free_game(game);
 	}
+	else if (game->map[game->y_axis][game->x_axis] == ENERMY)
+		free_enermy(game);
 	else if (game->map[game->y_axis][game->x_axis] == WALL ||
 			game->map[game->y_axis][game->x_axis] == EXIT)
 		game->y_axis -= 1;
@@ -89,6 +93,8 @@ void	move_left(t_data *game, int keycode)
 		ft_printf("\nYOU WIN!!\n\n");
 		free_game(game);
 	}
+	else if (game->map[game->y_axis][game->x_axis] == ENERMY)
+		free_enermy(game);
 	else if (game->map[game->y_axis][game->x_axis] == WALL ||
 			game->map[game->y_axis][game->x_axis] == EXIT)
 		game->x_axis += 1;
@@ -115,6 +121,8 @@ void	move_right(t_data *game, int keycode)
 		ft_printf("\nYOU WIN!!\n\n");
 		free_game(game);
 	}
+	else if (game->map[game->y_axis][game->x_axis] == ENERMY)
+		free_enermy(game);
 	else if (game->map[game->y_axis][game->x_axis] == WALL ||
 			game->map[game->y_axis][game->x_axis] == EXIT)
 		game->x_axis -= 1;

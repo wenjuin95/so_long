@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	print_step(t_data *game)
 {
@@ -18,6 +18,12 @@ void	print_step(t_data *game)
 	ft_printf("Step: %d\n", game->step);
 	ft_printf("item left: %d\n\n", game->c_count);
 	put_to_win(game);
+}
+
+void	free_enermy(t_data *game)
+{
+	ft_printf("\nYOU LOSE\n\n");
+	free_game(game);
 }
 
 void	change_exit(t_data *game, int x, int y)
@@ -35,21 +41,25 @@ static void	game_key(int keycode, t_data *game)
 	{
 		game->y_axis--;
 		move_up(game, keycode);
+		// enermy_follow_up(game);
 	}
 	else if (keycode == S)
 	{
 		game->y_axis++;
 		move_down(game, keycode);
+		enermy_follow_down(game);
 	}
 	else if (keycode == A)
 	{
 		game->x_axis--;
 		move_left(game, keycode);
+		enermy_follow_left(game);
 	}
 	else if (keycode == D)
 	{
 		game->x_axis++;
 		move_right(game, keycode);
+		enermy_follow_right(game);
 	}
 }
 

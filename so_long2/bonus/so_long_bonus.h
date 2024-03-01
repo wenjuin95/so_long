@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
@@ -25,14 +25,20 @@
 # define PLAYER 'P'
 # define EXIT 'E'
 # define COLLECT '7'
+# define ENERMY '9'
 
 # define IMG_W "asset/wall.xpm"
 # define IMG_F "asset/floor.xpm"
+# define IMG_ENE "asset/enermy.xpm"
 
 # define IMG_E "asset/exit.xpm"
 # define IMG_E2 "asset/exit2.xpm"
 
 # define IMG_I "asset/item.xpm"
+# define IMG_I2 "asset/item2.xpm"
+# define IMG_I3 "asset/item3.xpm"
+# define IMG_I4 "asset/item4.xpm"
+# define IMG_I5 "asset/item5.xpm"
 
 # define IMG_P "asset/player_down.xpm"
 # define IMG_P_UP "asset/player_up.xpm"
@@ -55,6 +61,12 @@
 // # define D 100
 // # define A 97
 
+typedef struct s_enermy
+{
+	int		x;
+	int		y;
+}			t_enermy;
+
 typedef struct s_data
 {
 	void	*mlx;
@@ -65,6 +77,7 @@ typedef struct s_data
 	void	*floor;
 	void	*collect;
 	void	*exit;
+	void	*enermy;
 	int		map_height;
 	int		map_width;
 	int		image_h;
@@ -75,6 +88,8 @@ typedef struct s_data
 	int		x_axis;
 	int		y_axis;
 	int		step;
+	int		item_pos;
+	int		frame;
 }			t_data;
 
 //error handling
@@ -89,8 +104,6 @@ char	**read_map(char *av);
 void	init(t_data *game);
 
 //image to window
-int		flood_fill(t_data *game, int x, int y);
-void	check_exit(t_data *game);
 void	place_xpm_to_image(t_data *game);
 int		put_to_win(t_data *game);
 
@@ -108,5 +121,14 @@ void	move_up(t_data *game, int keycode);
 void	move_down(t_data *game, int keycode);
 void	move_left(t_data *game, int keycode);
 void	move_right(t_data *game, int keycode);
+
+//animation
+int		animation(t_data *game);
+
+//enermy
+void	enermy_follow_up(t_data *game);
+void	enermy_follow_down(t_data *game);
+void	enermy_follow_left(t_data *game);
+void	enermy_follow_right(t_data *game);
 
 #endif

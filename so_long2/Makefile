@@ -6,7 +6,7 @@
 #    By: welow <welow@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/05 13:38:29 by welow             #+#    #+#              #
-#    Updated: 2024/02/21 16:07:18 by welow            ###   ########.fr        #
+#    Updated: 2024/03/01 13:19:26 by welow            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,17 @@ NAME = so_long
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 SRC = src/so_long.c src/get_image.c src/error_handling.c src/read_map.c src/init.c \
-	  src/control_1.c src/control_2.c src/gameplay.c src/animation.c src/enermy.c
+	  src/control_1.c src/control_2.c src/gameplay.c
 
-OBJ_DIR = temp_obj
-OBJ_SRC = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
+BONUS = bonus/so_long_bonus.c bonus/get_image_bonus.c bonus/error_handling_bonus.c bonus/read_map_bonus.c bonus/init_bonus.c \
+	  bonus/control_1_bonus.c bonus/control_2_bonus.c bonus/gameplay_bonus.c bonus/animation_bonus.c bonus/enermy_bonus.c
+
+OBJ_SRC = $(SRC:.c=.o)
+
+OBJ_BONUS = $(BONUS:.c=.o)
 
 ifeq ($(shell uname), Linux)
 	MINILIBX = minilibx-linux/
@@ -36,22 +40,26 @@ endif
 
 all: $(OBJ_DIR) $(NAME)
 
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
-
 $(NAME) : $(OBJ_SRC)
 	make -C $(MINILIBX)
 	make -C libft
 	cp libft/libft.a .
 	$(CC) $(CFLAGS) $(OBJ_SRC) libft.a $(MINILIBX_LIBRARY) -o $(NAME)
 
-$(OBJ_DIR)/%.o: src/%.c
+bonus: $(OBJ_BONUS)
+	make -C $(MINILIBX)
+	make -C libft
+	cp libft/libft.a .
+	$(CC) $(CFLAGS) $(OBJ_BONUS) libft.a $(MINILIBX_LIBRARY) -o $(NAME)
+
+%.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	make clean -C libft
 	make clean -C $(MINILIBX)
-	rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ_SRC)
+	rm -rf $(OBJ_BONUS)
 	rm -f libft.a
 
 fclean : clean
@@ -60,4 +68,4 @@ fclean : clean
 	
 re : fclean all
 
-.PHONY : all clean fclean re 
+.PHONY : all clean fclean re bonus

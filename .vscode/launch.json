@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/welow/Desktop/github/so_long/so_long1/libft",
-      "program": "/Users/welow/Desktop/github/so_long/so_long1/libft/build/Debug/outDebug"
+      "cwd": "/Users/welow/Desktop/github/so_long/so_long2/src",
+      "program": "/Users/welow/Desktop/github/so_long/so_long2/src/build/Debug/outDebug"
     }
   ]
 }
