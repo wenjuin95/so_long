@@ -48,7 +48,7 @@ djusting this value can control the speed or duration of the animation.
 */
 int	animation(t_data *game)
 {
-	if (game->frame < 1000)
+	if (game->frame <= 1000)
 	{
 		game->frame++;
 		return (0);
@@ -60,3 +60,4 @@ int	animation(t_data *game)
 	game->frame = 0;
 	return (0);
 }
+

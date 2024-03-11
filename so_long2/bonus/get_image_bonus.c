@@ -12,6 +12,21 @@
 
 #include "so_long_bonus.h"
 
+static void	display_string(t_data *game)
+{
+	char	*step;
+	char	*item;
+
+	step = ft_itoa(game->step);
+	item = ft_itoa(game->c_count);
+	mlx_string_put(game->mlx, game->win, 5, 15, 0xFFFFFF, "Step:");
+	mlx_string_put(game->mlx, game->win, 40, 15, 0xFFFFFF, step);
+	mlx_string_put(game->mlx, game->win, 5, 25, 0xFFFFFF, "item:");
+	mlx_string_put(game->mlx, game->win, 40, 25, 0xFFFFFF, item);
+	free(step);
+	free(item);
+}
+
 void	place_xpm_to_image(t_data *game)
 {
 	game->floor = mlx_xpm_file_to_image(game->mlx, IMG_F,
@@ -28,43 +43,6 @@ void	place_xpm_to_image(t_data *game)
 			&game->image_w, &game->image_h);
 }
 
-static void	position_player(t_data *game, int x, int y)
-{
-	mlx_put_image_to_window(game->mlx, game->win, game->player,
-		x * XPM_WIDTH, y * XPM_HEIGHT);
-	game->x_axis = x;
-	game->y_axis = y;
-}
-
-// static void	position_enermy(t_data *game, int x, int y)
-// {
-// 	mlx_put_image_to_window(game->mlx, game->win, game->enermy,
-// 		x * XPM_WIDTH, y * XPM_HEIGHT);
-// 	game->enermy_x = x;
-// 	game->enermy_y = y;
-// }
-
-// static void	position_enermy(t_data *game, int x, int y)
-// {
-// 	t_enermy	*new_enermies;
-
-// 	new_enermies = malloc((game->enermy_count + 1) * sizeof(t_enermy));
-// 	if (new_enermies == NULL)
-// 		return ;
-// 	if (game->enermies != NULL)
-// 	{
-// 		ft_memcpy(new_enermies, game->enermies, game->enermy_count
-// 			* sizeof(t_enermy));
-// 		free(game->enermies);
-// 	}
-// 	game->enermies = new_enermies;
-// 	game->enermies[game->enermy_count].x = x;
-// 	game->enermies[game->enermy_count].y = y;
-// 	game->enermy_count++;
-// 	mlx_put_image_to_window(game->mlx, game->win, game->enermy,
-// 		x * XPM_WIDTH, y * XPM_HEIGHT);
-// }
-
 static void	image_to_it(t_data *game, int y, int x)
 {
 	if (game->map[y][x] == WALL)
@@ -74,7 +52,8 @@ static void	image_to_it(t_data *game, int y, int x)
 		mlx_put_image_to_window(game->mlx, game->win, game->collect,
 			x * XPM_WIDTH, y * XPM_HEIGHT);
 	else if (game->map[y][x] == PLAYER)
-		position_player(game, x, y);
+		mlx_put_image_to_window(game->mlx, game->win, game->player,
+			x * XPM_WIDTH, y * XPM_HEIGHT);
 	else if (game->map[y][x] == EXIT)
 		mlx_put_image_to_window(game->mlx, game->win, game->exit,
 			x * XPM_WIDTH, y * XPM_HEIGHT);
@@ -82,8 +61,12 @@ static void	image_to_it(t_data *game, int y, int x)
 		mlx_put_image_to_window(game->mlx, game->win, game->floor,
 			x * XPM_WIDTH, y * XPM_HEIGHT);
 	else if (game->map[y][x] == ENERMY)
+	{
 		mlx_put_image_to_window(game->mlx, game->win, game->enermy,
 			x * XPM_WIDTH, y * XPM_HEIGHT);
+		game->x_enermy = x;
+		game->y_enermy = y;
+	}
 }
 
 int	put_to_win(t_data *game)
@@ -100,5 +83,6 @@ int	put_to_win(t_data *game)
 			image_to_it(game, y, x);
 		}
 	}
+	display_string(game);
 	return (0);
 }

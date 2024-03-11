@@ -39,21 +39,22 @@
 # define IMG_P_LEFT "asset/player_left.xpm"
 # define IMG_P_RIGHT "asset/player_right.xpm"
 
-//mac
-# define ESC 53
-# define Q 12
-# define W 13
-# define S 1
-# define D 2
-# define A 0
+# ifdef __APPLE__
+#  define ESC 53
+#  define Q 12
+#  define W 13
+#  define S 1
+#  define D 2
+#  define A 0
+# else
+#  define ESC 65307
+#  define Q 113
+#  define W 119
+#  define S 115
+#  define D 100
+#  define A 97
+# endif
 
-// //linux
-// # define ESC 65307
-// # define Q 113
-// # define W 119
-// # define S 115
-// # define D 100
-// # define A 97
 
 typedef struct s_data
 {
@@ -100,13 +101,11 @@ void	gameplay(t_data *game);
 
 //key control
 int		control(int keycode, t_data *game);
-void	free_enermy(t_data *game);
-void	change_exit(t_data *game, int x, int y);
-void	print_step(t_data *game);
 void	image_for_key(t_data *game, int keycode);
-void	move_up(t_data *game, int keycode);
-void	move_down(t_data *game, int keycode);
-void	move_left(t_data *game, int keycode);
-void	move_right(t_data *game, int keycode);
+int		check_move(t_data *game, int x, int y);
+int		move_up(t_data *game, int keycode);
+int		move_down(t_data *game, int keycode);
+int		move_left(t_data *game, int keycode);
+int		move_right(t_data *game, int keycode);
 
 #endif

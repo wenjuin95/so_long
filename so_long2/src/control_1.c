@@ -12,54 +12,92 @@
 
 #include "so_long.h"
 
-void	print_step(t_data *game)
+/*
+*	1.chg position player
+*/
+void	image_for_key(t_data *game, int keycode)
 {
-	game->step++;
-	ft_printf("Step: %d\n", game->step);
-	ft_printf("item left: %d\n\n", game->c_count);
-	put_to_win(game);
-}
-
-void	change_exit(t_data *game, int x, int y)
-{
-	mlx_destroy_image(game->mlx, game->exit);
-	game->exit = mlx_xpm_file_to_image(game->mlx, IMG_E2,
-			&game->image_w, &game->image_h);
-	mlx_put_image_to_window(game->mlx, game->win, game->exit,
-		x * XPM_WIDTH, y * XPM_HEIGHT);
-}
-
-static void	game_key(int keycode, t_data *game)
-{
+	mlx_destroy_image(game->mlx, game->player);
 	if (keycode == W)
+		game->player = mlx_xpm_file_to_image(game->mlx,
+				IMG_P_UP, &game->image_w, &game->image_h);
+	if (keycode == S)
+		game->player = mlx_xpm_file_to_image(game->mlx,
+				IMG_P, &game->image_w, &game->image_h);
+	if (keycode == D)
+		game->player = mlx_xpm_file_to_image(game->mlx,
+				IMG_P_RIGHT, &game->image_w, &game->image_h);
+	if (keycode == A)
+		game->player = mlx_xpm_file_to_image(game->mlx,
+				IMG_P_LEFT, &game->image_w, &game->image_h);
+}
+
+/*
+*	1.(extend)check item
+*/
+static void	check_item(t_data *game, int x, int y)
+{
+	if (game->map[y][x] == COLLECT)
 	{
-		game->y_axis--;
-		move_up(game, keycode);
-	}
-	else if (keycode == S)
-	{
-		game->y_axis++;
-		move_down(game, keycode);
-	}
-	else if (keycode == A)
-	{
-		game->x_axis--;
-		move_left(game, keycode);
-	}
-	else if (keycode == D)
-	{
-		game->x_axis++;
-		move_right(game, keycode);
+		game->map[y][x] = PLAYER;
+		game->x_axis = x;
+		game->y_axis = y;
+		game->step++;
+		game->c_count--;
+		if (game->c_count == 0)
+		{
+			mlx_destroy_image(game->mlx, game->exit);
+			game->exit = mlx_xpm_file_to_image(game->mlx,
+					IMG_E2, &game->image_w, &game->image_h);
+		}
 	}
 }
 
-int	control(int keycode, t_data *game)
+/*
+*	1.check move
+*/
+int	check_move(t_data *game, int x, int y)
 {
-	if (keycode == ESC || keycode == Q)
+	check_item(game, x, y);
+	if (game->map[y][x] == EXIT)
 	{
-		ft_printf("\nYOU QUIT\n\n");
+		if (game->c_count != 0)
+			return (0);
+		ft_printf("\nYOU WIN!!\n\n");
 		free_game(game);
 	}
-	game_key(keycode, game);
-	return (0);
+	if (game->map[y][x] == FLOOR)
+	{
+		game->map[y][x] = PLAYER;
+		game->x_axis = x;
+		game->y_axis = y;
+		game->step++;
+	}
+	return (1);
+}
+
+/*
+*	note: the excutable is to check if the move is executable
+*/
+int	control(int keycode, t_data *game)
+{
+	int	executable;
+
+	if (keycode == ESC || keycode == Q)
+	{
+		ft_printf("\nYou had quit the game\n\n");
+		free_game(game);
+		exit(EXIT_SUCCESS);
+	}
+	if (keycode == W)
+		executable = move_up(game, keycode);
+	if (keycode == S)
+		executable = move_down(game, keycode);
+	if (keycode == A)
+		executable = move_left(game, keycode);
+	if (keycode == D)
+		executable = move_right(game, keycode);
+	if (executable == 1)
+		put_to_win(game);
+	return (1);
 }

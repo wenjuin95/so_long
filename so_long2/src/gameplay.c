@@ -12,6 +12,9 @@
 
 #include "so_long.h"
 
+/*
+*	1.free all the memory that has been allocated and exit the program
+*/
 int	free_game(t_data *game)
 {
 	free_all(game->map);
@@ -25,6 +28,10 @@ int	free_game(t_data *game)
 	exit(EXIT_SUCCESS);
 }
 
+/*
+*	1. control is to control the player
+* 	2. free_game is to free the game (when you press the red cross)
+*/
 void	gameplay(t_data *game)
 {
 	mlx_hook(game->win, 2, 0, control, game);

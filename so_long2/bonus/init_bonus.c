@@ -66,7 +66,7 @@ void	init(t_data *game)
 	get_window_size(game);
 	game->win = mlx_new_window(game->mlx, game->map_width, game->map_height,
 			"so_long");
+	check_exit(game);
 	place_xpm_to_image(game);
 	put_to_win(game);
-	check_exit(game);
 }

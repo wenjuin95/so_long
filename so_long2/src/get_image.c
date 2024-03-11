@@ -13,6 +13,9 @@
 #include "so_long.h"
 #include <assert.h>
 
+/*
+*	1.place the xpm to the image
+*/
 void	place_xpm_to_image(t_data *game)
 {
 	game->floor = mlx_xpm_file_to_image(game->mlx, IMG_F,
@@ -27,14 +30,9 @@ void	place_xpm_to_image(t_data *game)
 			&game->image_w, &game->image_h);
 }
 
-static void	position_player(t_data *game, int x, int y)
-{
-	mlx_put_image_to_window(game->mlx, game->win, game->player,
-		x * XPM_WIDTH, y * XPM_HEIGHT);
-	game->x_axis = x;
-	game->y_axis = y;
-}
-
+/*
+*	1.(extend)place the image to the window
+*/
 static void	image_to_it(t_data *game, int y, int x)
 {
 	if (game->map[y][x] == WALL)
@@ -44,7 +42,8 @@ static void	image_to_it(t_data *game, int y, int x)
 		mlx_put_image_to_window(game->mlx, game->win, game->collect,
 			x * XPM_WIDTH, y * XPM_HEIGHT);
 	else if (game->map[y][x] == PLAYER)
-		position_player(game, x, y);
+		mlx_put_image_to_window(game->mlx, game->win, game->player,
+			x * XPM_WIDTH, y * XPM_HEIGHT);
 	else if (game->map[y][x] == EXIT)
 		mlx_put_image_to_window(game->mlx, game->win, game->exit,
 			x * XPM_WIDTH, y * XPM_HEIGHT);
@@ -53,6 +52,10 @@ static void	image_to_it(t_data *game, int y, int x)
 			x * XPM_WIDTH, y * XPM_HEIGHT);
 }
 
+/*
+*	1.place the image to the window
+
+*/
 int	put_to_win(t_data *game)
 {
 	int	y;

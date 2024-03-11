@@ -12,131 +12,98 @@
 
 #include "so_long_bonus.h"
 
-void	image_for_key(t_data *game, int keycode)
+int	move_up(t_data *game, int keycode)
 {
-	mlx_destroy_image(game->mlx, game->player);
+	int	i;
+	int	y;
+	int	x;
+
+	y = game->y_axis;
+	x = game->x_axis;
+	image_for_key(game, keycode);
 	if (keycode == W)
-		game->player = mlx_xpm_file_to_image(game->mlx,
-				IMG_P_UP, &game->image_w, &game->image_h);
+	{
+		y--;
+		if (game->map[y][x] == WALL)
+			return (0);
+		i = check_move(game, x, y);
+		if (i == 0)
+			return (0);
+		game->map[y + 1][x] = FLOOR;
+	}
+	ft_printf("Step taken: %d\n", game->step);
+	ft_printf("Items left: %d\n\n", game->c_count);
+	return (1);
+}
+
+int	move_down(t_data *game, int keycode)
+{
+	int	i;
+	int	y;
+	int	x;
+
+	y = game->y_axis;
+	x = game->x_axis;
+	image_for_key(game, keycode);
 	if (keycode == S)
-		game->player = mlx_xpm_file_to_image(game->mlx,
-				IMG_P, &game->image_w, &game->image_h);
-	if (keycode == D)
-		game->player = mlx_xpm_file_to_image(game->mlx,
-				IMG_P_RIGHT, &game->image_w, &game->image_h);
+	{
+		y++;
+		if (game->map[y][x] == WALL)
+			return (0);
+		i = check_move(game, x, y);
+		if (i == 0)
+			return (0);
+		game->map[y - 1][x] = FLOOR;
+	}
+	ft_printf("Step taken: %d\n", game->step);
+	ft_printf("Items left: %d\n\n", game->c_count);
+	return (1);
+}
+
+int	move_left(t_data *game, int keycode)
+{
+	int	i;
+	int	y;
+	int	x;
+
+	y = game->y_axis;
+	x = game->x_axis;
+	image_for_key(game, keycode);
 	if (keycode == A)
-		game->player = mlx_xpm_file_to_image(game->mlx,
-				IMG_P_LEFT, &game->image_w, &game->image_h);
+	{
+		x--;
+		if (game->map[y][x] == WALL)
+			return (0);
+		i = check_move(game, x, y);
+		if (i == 0)
+			return (0);
+		game->map[y][x + 1] = FLOOR;
+	}
+	ft_printf("Step taken: %d\n", game->step);
+	ft_printf("Items left: %d\n\n", game->c_count);
+	return (1);
 }
 
-void	move_up(t_data *game, int keycode)
+int	move_right(t_data *game, int keycode)
 {
-	image_for_key(game, keycode);
-	if (game->map[game->y_axis][game->x_axis] == EXIT && game->c_count == 0)
-	{
-		ft_printf("\nYOU WIN!!\n\n");
-		free_game(game);
-	}
-	else if (game->map[game->y_axis][game->x_axis] == ENERMY)
-		free_enermy(game);
-	else if (game->map[game->y_axis][game->x_axis] == WALL ||
-			game->map[game->y_axis][game->x_axis] == EXIT)
-		game->y_axis += 1;
-	else
-	{
-		mlx_clear_window(game->mlx, game->win);
-		if (game->map[game->y_axis][game->x_axis] == COLLECT)
-		{
-			game->c_count--;
-			if (game->c_count == 0)
-				change_exit(game, game->x_axis, game->y_axis);
-		}
-		game->map[game->y_axis][game->x_axis] = PLAYER;
-		game->map[game->y_axis + 1][game->x_axis] = FLOOR;
-		print_step(game);
-	}
-}
+	int	i;
+	int	y;
+	int	x;
 
-void	move_down(t_data *game, int keycode)
-{
+	y = game->y_axis;
+	x = game->x_axis;
 	image_for_key(game, keycode);
-	if (game->map[game->y_axis][game->x_axis] == EXIT && game->c_count == 0)
+	if (keycode == D)
 	{
-		ft_printf("\nYOU WIN!!\n\n");
-		free_game(game);
+		x++;
+		if (game->map[y][x] == WALL)
+			return (0);
+		i = check_move(game, x, y);
+		if (i == 0)
+			return (0);
+		game->map[y][x - 1] = FLOOR;
 	}
-	else if (game->map[game->y_axis][game->x_axis] == ENERMY)
-		free_enermy(game);
-	else if (game->map[game->y_axis][game->x_axis] == WALL ||
-			game->map[game->y_axis][game->x_axis] == EXIT)
-		game->y_axis -= 1;
-	else
-	{
-		mlx_clear_window(game->mlx, game->win);
-		if (game->map[game->y_axis][game->x_axis] == COLLECT)
-		{
-			game->c_count--;
-			if (game->c_count == 0)
-				change_exit(game, game->x_axis, game->y_axis);
-		}
-		game->map[game->y_axis][game->x_axis] = PLAYER;
-		game->map[game->y_axis - 1][game->x_axis] = FLOOR;
-		print_step(game);
-	}
-}
-
-void	move_left(t_data *game, int keycode)
-{
-	image_for_key(game, keycode);
-	if (game->map[game->y_axis][game->x_axis] == EXIT && game->c_count == 0)
-	{
-		ft_printf("\nYOU WIN!!\n\n");
-		free_game(game);
-	}
-	else if (game->map[game->y_axis][game->x_axis] == ENERMY)
-		free_enermy(game);
-	else if (game->map[game->y_axis][game->x_axis] == WALL ||
-			game->map[game->y_axis][game->x_axis] == EXIT)
-		game->x_axis += 1;
-	else
-	{
-		mlx_clear_window(game->mlx, game->win);
-		if (game->map[game->y_axis][game->x_axis] == COLLECT)
-		{
-			game->c_count--;
-			if (game->c_count == 0)
-				change_exit(game, game->x_axis, game->y_axis);
-		}
-		game->map[game->y_axis][game->x_axis] = PLAYER;
-		game->map[game->y_axis][game->x_axis + 1] = FLOOR;
-		print_step(game);
-	}
-}
-
-void	move_right(t_data *game, int keycode)
-{
-	image_for_key(game, keycode);
-	if (game->map[game->y_axis][game->x_axis] == EXIT && game->c_count == 0)
-	{
-		ft_printf("\nYOU WIN!!\n\n");
-		free_game(game);
-	}
-	else if (game->map[game->y_axis][game->x_axis] == ENERMY)
-		free_enermy(game);
-	else if (game->map[game->y_axis][game->x_axis] == WALL ||
-			game->map[game->y_axis][game->x_axis] == EXIT)
-		game->x_axis -= 1;
-	else
-	{
-		mlx_clear_window(game->mlx, game->win);
-		if (game->map[game->y_axis][game->x_axis] == COLLECT)
-		{
-			game->c_count--;
-			if (game->c_count == 0)
-				change_exit(game, game->x_axis, game->y_axis);
-		}
-		game->map[game->y_axis][game->x_axis] = PLAYER;
-		game->map[game->y_axis][game->x_axis - 1] = FLOOR;
-		print_step(game);
-	}
+	ft_printf("Step taken: %d\n", game->step);
+	ft_printf("Items left: %d\n\n", game->c_count);
+	return (1);
 }

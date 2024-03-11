@@ -6,7 +6,7 @@
 #    By: welow <welow@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/05 13:38:29 by welow             #+#    #+#              #
-#    Updated: 2024/03/01 13:19:26 by welow            ###   ########.fr        #
+#    Updated: 2024/03/08 15:30:13 by welow            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,14 +28,10 @@ OBJ_BONUS = $(BONUS:.c=.o)
 
 ifeq ($(shell uname), Linux)
 	MINILIBX = minilibx-linux/
+	MINILIBX_LIBRARY = -L$(MINILIBX) -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 else
 	MINILIBX = minilibx/
-endif
-
-ifeq ($(shell uname), Linux)
-	MINILIBX_LIBRARY = -Lminilibx-linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-else
-	MINILIBX_LIBRARY = -Lminilibx -lmlx -framework OpenGL -framework AppKit
+	MINILIBX_LIBRARY = -L$(MINILIBX) -lmlx -framework OpenGL -framework AppKit
 endif
 
 all: $(OBJ_DIR) $(NAME)

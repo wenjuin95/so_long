@@ -12,6 +12,9 @@
 
 #include "so_long.h"
 
+/*
+*	get_window_size is to get the size of the window
+*/
 static void	get_window_size(t_data *game)
 {
 	int	i;
@@ -23,6 +26,13 @@ static void	get_window_size(t_data *game)
 	game->map_height = i * XPM_HEIGHT;
 }
 
+/*
+*	1.the purpose of flood fill is to find the exit
+* 	2.player will go trough the whole map and change the floor 
+*	  and collect to 7 and 8
+*	3.the purpose of chg 7 and 8 is to prevent the player from going back 
+*	  to the floor and collect
+*/
 int	flood_fill(t_data *game, int x, int y)
 {
 	int	result;
@@ -52,23 +62,25 @@ void	check_exit(t_data *game)
 {
 	if (flood_fill(game, game->x_axis, game->y_axis) == 0)
 	{
-		ft_printf("Error map\n");
+		ft_printf("Error: not found exit\n");
 		free_all(game->map);
 		exit(EXIT_FAILURE);
 	}
 }
 
+/*
+*	1.get the size map
+*	2.check the did found exit
+*	3.put image 
+* 
+*/
 void	init(t_data *game)
 {
 	game->mlx = mlx_init();
 	get_window_size(game);
 	game->win = mlx_new_window(game->mlx, game->map_width, game->map_height,
 			"so_long");
-	place_xpm_to_image(game);
-	put_to_win(game);
 	check_exit(game);
-	mlx_destroy_image(game->mlx, game->floor);
-	mlx_destroy_image(game->mlx, game->collect);
 	place_xpm_to_image(game);
 	put_to_win(game);
 }
