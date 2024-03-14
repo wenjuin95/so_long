@@ -46,18 +46,36 @@ then resets game->frame to 0 for the next frame.
 Once this limit is reached, the animation "resets" and starts over from the beginning. 
 djusting this value can control the speed or duration of the animation.
 */
+// int	animation(t_data *game)
+// {
+// 	if (game->frame <= 1000)
+// 	{
+// 		game->frame++;
+// 		return (0);
+// 	}
+// 	mlx_destroy_image(game->mlx, game->collect);
+// 	load_image(game);
+// 	put_to_win(game);
+// 	game->item_pos++;
+// 	game->frame = 0;
+// 	return (0);
+// }
+
+/*
+ * 1. increase the frame if is not equal 1000
+ * 2. equal 3000 only chg image
+ */
 int	animation(t_data *game)
 {
-	if (game->frame <= 1000)
+	game->frame++;
+	if (game->frame == 1000)
 	{
-		game->frame++;
-		return (0);
+		mlx_destroy_image(game->mlx, game->collect);
+		load_image(game);
+		put_to_win(game);
+		game->item_pos++;
+		game->frame = 0;
 	}
-	mlx_destroy_image(game->mlx, game->collect);
-	load_image(game);
-	put_to_win(game);
-	game->item_pos++;
-	game->frame = 0;
 	return (0);
 }
 
