@@ -22,7 +22,7 @@
 
 # define WALL '1'
 # define FLOOR '8'
-# define PLAYER 'P'
+# define PLAYER '6'
 # define EXIT 'E'
 # define COLLECT '7'
 
@@ -55,7 +55,6 @@
 #  define A 97
 # endif
 
-
 typedef struct s_data
 {
 	void	*mlx;
@@ -79,15 +78,15 @@ typedef struct s_data
 }			t_data;
 
 //error handling
-int		check_input(char *av);
+void	check_input(char *av);
 int		check_map(t_data *game);
 void	free_all(char **map);
 
 //read map content
 char	**read_map(char *av);
 
-//initialization
-void	init(t_data *game);
+//put image
+void	input_image(t_data *game);
 
 //image to window
 int		flood_fill(t_data *game, int x, int y);
@@ -95,9 +94,9 @@ void	check_exit(t_data *game);
 void	place_xpm_to_image(t_data *game);
 int		put_to_win(t_data *game);
 
-//gameplay
+//put control
+void	input_control(t_data *game);
 int		free_game(t_data *game);
-void	gameplay(t_data *game);
 
 //key control
 int		control(int keycode, t_data *game);

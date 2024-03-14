@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: welow <welow@student.42.fr>                +#+  +:+       +#+         #
+#    By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/05 13:38:29 by welow             #+#    #+#              #
-#    Updated: 2024/03/08 15:30:13 by welow            ###   ########.fr        #
+#    Updated: 2024/03/14 15:03:27 by welow            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,11 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
-SRC = src/so_long.c src/get_image.c src/error_handling.c src/read_map.c src/init.c \
-	  src/control_1.c src/control_2.c src/gameplay.c
+SRC = src/so_long.c src/get_image.c src/error_handling.c src/read_map.c src/input_image.c \
+	  src/control_1.c src/control_2.c src/input_control.c
 
-BONUS = bonus/so_long_bonus.c bonus/get_image_bonus.c bonus/error_handling_bonus.c bonus/read_map_bonus.c bonus/init_bonus.c \
-	  bonus/control_1_bonus.c bonus/control_2_bonus.c bonus/gameplay_bonus.c bonus/animation_bonus.c bonus/enermy_bonus.c
+BONUS = bonus/so_long_bonus.c bonus/get_image_bonus.c bonus/error_handling_bonus.c bonus/read_map_bonus.c bonus/input_image_bonus.c \
+	  bonus/control_1_bonus.c bonus/control_2_bonus.c bonus/input_control_bonus.c bonus/animation_bonus.c bonus/enermy_bonus.c
 
 OBJ_SRC = $(SRC:.c=.o)
 

@@ -10,8 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long_bonus.h"
+#include "so_long.h"
 
+/*
+*	get_window_size is to get the size of the window
+*/
 static void	get_window_size(t_data *game)
 {
 	int	i;
@@ -23,6 +26,14 @@ static void	get_window_size(t_data *game)
 	game->map_height = i * XPM_HEIGHT;
 }
 
+/*
+*   note: use bitwise or operator to check
+*	1.the purpose of flood fill is to find the exit
+* 	2.player will go trough the whole map and change the floor 
+*	  and collect to 7 and 8
+*	3.the purpose of chg 7 and 8 is to prevent the player from going back 
+*	  to the floor and collect
+*/
 int	flood_fill(t_data *game, int x, int y)
 {
 	int	result;
@@ -31,22 +42,20 @@ int	flood_fill(t_data *game, int x, int y)
 	if (x < 0 || y < 0 || game->map_width <= x || game->map_height <= y)
 		return (0);
 	if (game->map[y][x] == '1' || game->map[y][x] == '7'
-		|| game->map[y][x] == '8' || game->map[y][x] == '9')
+		|| game->map[y][x] == '8')
 		return (0);
 	if (game->map[y][x] == 'P')
-		;
+		game->map[y][x] = '6';
 	if (game->map[y][x] == 'C')
 		game->map[y][x] = '7';
 	if (game->map[y][x] == '0')
 		game->map[y][x] = '8';
-	if (game->map[y][x] == 'I')
-		game->map[y][x] = '9';
 	if (game->map[y][x] == 'E')
 		return (1);
-	result |= flood_fill(game, x + 1, y);
-	result |= flood_fill(game, x - 1, y);
-	result |= flood_fill(game, x, y + 1);
-	result |= flood_fill(game, x, y - 1);
+	result = result | flood_fill(game, x + 1, y);
+	result = result | flood_fill(game, x - 1, y);
+	result = result | flood_fill(game, x, y + 1);
+	result = result | flood_fill(game, x, y - 1);
 	return (result);
 }
 
@@ -54,13 +63,19 @@ void	check_exit(t_data *game)
 {
 	if (flood_fill(game, game->x_axis, game->y_axis) == 0)
 	{
-		ft_printf("Error map\n");
+		ft_printf("Error: not found exit\n");
 		free_all(game->map);
 		exit(EXIT_FAILURE);
 	}
 }
 
-void	init(t_data *game)
+/*
+*	1.get the size map
+*	2.check the exit cover by wall?
+*	3.put image 
+* 
+*/
+void	input_image(t_data *game)
 {
 	game->mlx = mlx_init();
 	get_window_size(game);

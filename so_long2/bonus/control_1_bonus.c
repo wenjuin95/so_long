@@ -29,6 +29,7 @@ void	image_for_key(t_data *game, int keycode)
 				IMG_P_LEFT, &game->image_w, &game->image_h);
 }
 
+//if i touch enermy
 static void	check_enermy(t_data *game, int x, int y)
 {
 	if (game->map[y][x] == ENERMY)

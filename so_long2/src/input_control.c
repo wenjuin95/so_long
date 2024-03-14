@@ -32,8 +32,8 @@ int	free_game(t_data *game)
 *	1. control is to control the player
 * 	2. free_game is to free the game (when you press the red cross)
 */
-void	gameplay(t_data *game)
+void	input_control(t_data *game)
 {
-	mlx_hook(game->win, 2, 0, control, game);
+	mlx_hook(game->win, 2, (1L << 0), control, game);
 	mlx_hook(game->win, 17, 0, free_game, game);
 }

@@ -12,14 +12,17 @@
 
 #include "so_long_bonus.h"
 
-int	check_input(char *av)
+// check if the input is a .ber file
+void	check_input(char *av)
 {
 	int	i;
 
-	i = strlen(av) - 4;
-	if (strncmp(&av[i], ".ber", 4) == 0)
-		return (1);
-	return (0);
+	i = ft_strlen(av) - 4;
+	if (ft_strncmp(&av[i], ".ber", 4) != 0)
+	{
+		ft_printf("not a .ber\n");
+		exit(EXIT_FAILURE);
+	}
 }
 
 void	free_all(char **map)
@@ -35,15 +38,6 @@ void	free_all(char **map)
 	free(map);
 }
 
-/*
- * 1. set all the struct to NULL and 0
- * 2. read the .ber and assign to map
- * 3. check if the map is valid & check if the input is valid
- * 4. if all is valid, initialize the game
- * 5. start the game
- * 6. loop the game
- * 7. if the map is not valid, free the map and print error
- */
 int	main(int ac, char **av)
 {
 	t_data	game;
@@ -54,15 +48,16 @@ int	main(int ac, char **av)
 		exit(EXIT_FAILURE);
 	}
 	ft_bzero(&game, sizeof(t_data));
+	check_input(av[1]);
 	game.map = read_map(av[1]);
-	if (!game.map || !check_map(&game) || !check_input(av[1]))
+	if (!game.map || !check_map(&game))
 	{
 		if (game.map != NULL)
 			free_all(game.map);
 		printf("Error\n");
 		exit(EXIT_FAILURE);
 	}
-	init(&game);
-	gameplay(&game);
+	input_image(&game);
+	input_control(&game);
 	mlx_loop(game.mlx);
 }

@@ -52,9 +52,10 @@ static void	check_if_pec(t_data *game, int h, int w)
 	if (game->map[h][w] == 'C')
 		game->c_count++;
 	if (game->map[h][w] == 'I')
-		game->i_count++;
+		game->ene_count++;
 }
 
+//enermy_present is for the control
 static int	check_pec(t_data *game)
 {
 	int	h;
@@ -73,7 +74,7 @@ static int	check_pec(t_data *game)
 	}
 	if (game->p_count != 1 || game->e_count != 1 || game->c_count < 1)
 		return (0);
-	if (game->i_count > 0)
+	if (game->ene_count > 0)
 		game->enermy_present = 1;
 	return (1);
 }

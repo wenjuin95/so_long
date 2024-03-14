@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enermy_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:14:08 by welow             #+#    #+#             */
-/*   Updated: 2024/03/11 10:03:25 by welow            ###   ########.fr       */
+/*   Updated: 2024/03/14 15:14:56 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ static int	enermy_right(t_data *game, int keycode)
 	return (1);
 }
 
+//enermy_present is a flag to check if the enermy is present or not
 int	enermy_control(int keycode, t_data *game)
 {
 	int	i;
