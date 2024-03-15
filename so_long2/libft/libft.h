@@ -13,12 +13,10 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stdlib.h>
-# include <string.h>
 # include <unistd.h>
 # include <limits.h>
 # include <fcntl.h>
 # include <limits.h>
-# include <stdio.h>
 # include <stdarg.h>
 
 # ifndef BUFFER_SIZE

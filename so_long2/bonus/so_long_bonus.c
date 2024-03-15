@@ -55,7 +55,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		printf("Error\n");
+		ft_printf("Error\n");
 		exit(EXIT_FAILURE);
 	}
 	ft_bzero(&game, sizeof(t_data));
@@ -65,7 +65,7 @@ int	main(int ac, char **av)
 	{
 		if (game.map != NULL)
 			free_all(game.map);
-		printf("Error\n");
+		ft_printf("Error\n");
 		exit(EXIT_FAILURE);
 	}
 	input_image(&game);
