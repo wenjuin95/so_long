@@ -12,15 +12,35 @@
 
 #include "so_long.h"
 
+//check each row it is similar to the first row
+int	check_rec(char **map)
+{
+	int	i;
+
+	if (*map == NULL)
+		return (0);
+	i = 0;
+	while (map[i])
+	{
+		if (ft_strlen(map[i]) != ft_strlen(map[0]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 /*
-*	1. (extend)check if the map has a wall
+*	1. check the column wall
+*	2. check the row wall
 */
-static int	check_wall(char **map)
+int	check_wall(char **map)
 {
 	int	h;
 	int	w;
 	int	len;
 
+	if (*map == NULL)
+		return (0);
 	h = 0;
 	w = 0;
 	while (map[h])
@@ -31,7 +51,7 @@ static int	check_wall(char **map)
 			return (0);
 		w++;
 	}
-	h = 1;
+	h = 0;
 	len = ft_strlen(map[h]);
 	while (map[h])
 	{
@@ -42,7 +62,7 @@ static int	check_wall(char **map)
 	return (1);
 }
 
-static void	check_if_pec(t_data *game, int h, int w)
+void	check_if_pec(t_data *game, int h, int w)
 {
 	if (game->map[h][w] == 'P')
 	{
@@ -59,7 +79,7 @@ static void	check_if_pec(t_data *game, int h, int w)
 /*
 *	1. (extend)check if the map has only player, exit and collectible
 */
-static int	check_pec(t_data *game)
+int	check_pec(t_data *game)
 {
 	int	h;
 	int	w;
@@ -80,7 +100,8 @@ static int	check_pec(t_data *game)
 	return (1);
 }
 
-static int	valid_map(t_data *game)
+//check any other character in this map
+int	valid_map(t_data *game)
 {
 	int	h;
 	int	w;
@@ -100,15 +121,4 @@ static int	valid_map(t_data *game)
 		h++;
 	}
 	return (1);
-}
-
-/*
-* 1. check map
-*/
-int	check_map(t_data *game)
-{
-	if (check_wall(game->map) != 0 && check_pec(game) != 0
-		&& valid_map(game) != 0)
-		return (1);
-	return (0);
 }

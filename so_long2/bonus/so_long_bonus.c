@@ -38,6 +38,17 @@ void	free_all(char **map)
 	free(map);
 }
 
+/*
+* 1. check map
+*/
+int	check_map(t_data *game)
+{
+	if (check_rec(game->map) != 0 && check_wall(game->map) != 0
+		&& check_pec(game) != 0 && valid_map(game) != 0)
+		return (1);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	game;

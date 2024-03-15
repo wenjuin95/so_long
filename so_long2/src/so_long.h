@@ -81,6 +81,11 @@ typedef struct s_data
 void	check_input(char *av);
 int		check_map(t_data *game);
 void	free_all(char **map);
+int		check_rec(char **map);
+int		check_wall(char **map);
+void	check_if_pec(t_data *game, int h, int w);
+int		check_pec(t_data *game);
+int		valid_map(t_data *game);
 
 //read map content
 char	**read_map(char *av);
