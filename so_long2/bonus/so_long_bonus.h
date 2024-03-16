@@ -61,12 +61,6 @@
 #  define A 97
 # endif
 
-typedef struct s_enermy
-{
-	int		x;
-	int		y;
-}			t_enermy;
-
 typedef struct s_data
 {
 	void	*mlx;
@@ -134,5 +128,9 @@ int		animation(t_data *game);
 
 //enermy
 int		enermy_control(int keycode, t_data *game);
+int		enermy_up(t_data *game, int keycode);
+int		enermy_down(t_data *game, int keycode);
+int		enermy_left(t_data *game, int keycode);
+int		enermy_right(t_data *game, int keycode);
 
 #endif

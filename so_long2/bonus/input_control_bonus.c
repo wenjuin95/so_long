@@ -26,6 +26,26 @@ int	free_game(t_data *game)
 	exit(EXIT_SUCCESS);
 }
 
+//enermy_present is a flag to check if the enermy is present or not
+int	enermy_control(int keycode, t_data *game)
+{
+	int	i;
+
+	if (game->enermy_present == 0)
+		return (0);
+	if (keycode == W)
+		i = enermy_up(game, keycode);
+	if (keycode == S)
+		i = enermy_down(game, keycode);
+	if (keycode == A)
+		i = enermy_left(game, keycode);
+	if (keycode == D)
+		i = enermy_right(game, keycode);
+	if (i == 1)
+		put_to_win(game);
+	return (1);
+}
+
 void	input_control(t_data *game)
 {
 	mlx_hook(game->win, 2, (1L << 0), control, game);
