@@ -44,8 +44,6 @@ int	flood_fill(t_data *game, int x, int y)
 	if (game->map[y][x] == '1' || game->map[y][x] == '7'
 		|| game->map[y][x] == '8')
 		return (0);
-	if (game->map[y][x] == 'P')
-		game->map[y][x] = '6';
 	if (game->map[y][x] == 'C')
 		game->map[y][x] = '7';
 	if (game->map[y][x] == '0')

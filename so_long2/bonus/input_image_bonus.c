@@ -33,8 +33,6 @@ int	flood_fill(t_data *game, int x, int y)
 	if (game->map[y][x] == '1' || game->map[y][x] == '7'
 		|| game->map[y][x] == '8' || game->map[y][x] == '9')
 		return (0);
-	if (game->map[y][x] == 'P')
-		game->map[y][x] = '6';
 	if (game->map[y][x] == 'C')
 		game->map[y][x] = '7';
 	if (game->map[y][x] == '0')
@@ -54,7 +52,7 @@ void	check_exit(t_data *game)
 {
 	if (flood_fill(game, game->x_axis, game->y_axis) == 0)
 	{
-		ft_printf("Error map\n");
+		ft_printf("Error: not found exit\n");
 		free_all(game->map);
 		exit(EXIT_FAILURE);
 	}

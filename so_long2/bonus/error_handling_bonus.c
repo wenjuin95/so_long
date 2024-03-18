@@ -28,15 +28,12 @@ int	check_rec(char **map)
 	return (1);
 }
 
-
 int	check_wall(char **map)
 {
 	int	h;
 	int	w;
 	int	len;
 
-	if (*map == NULL)
-		return (0);
 	h = 0;
 	w = 0;
 	while (map[h])

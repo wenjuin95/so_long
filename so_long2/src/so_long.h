@@ -22,7 +22,7 @@
 
 # define WALL '1'
 # define FLOOR '8'
-# define PLAYER '6'
+# define PLAYER 'P'
 # define EXIT 'E'
 # define COLLECT '7'
 

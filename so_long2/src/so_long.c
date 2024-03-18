@@ -61,20 +61,25 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		ft_printf("Error\n");
+		ft_printf("Error: wrong argument\n");
 		exit(EXIT_FAILURE);
 	}
 	ft_bzero(&game, sizeof(t_data));
 	check_input(av[1]);
 	game.map = read_map(av[1]);
-	if (!game.map || !check_map(&game))
+	if (game.map == NULL)
 	{
-		if (game.map != NULL)
-			free_all(game.map);
-		ft_printf("Error\n");
+		ft_printf("Error: empty\n");
+		exit(EXIT_FAILURE);
+	}
+	if (check_map(&game) == 0)
+	{
+		free_all(game.map);
+		ft_printf("Error: check\n");
 		exit(EXIT_FAILURE);
 	}
 	input_image(&game);
 	input_control(&game);
 	mlx_loop(game.mlx);
 }
+
