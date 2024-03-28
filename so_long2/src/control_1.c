@@ -78,7 +78,6 @@ int	check_move(t_data *game, int x, int y)
 
 /*
 *	note: the excutable is to check if the move is executable
-*	if is not executable the image won't chg mean the player won't move
 */
 int	control(int keycode, t_data *game)
 {

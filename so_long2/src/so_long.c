@@ -69,7 +69,7 @@ int	main(int ac, char **av)
 	game.map = read_map(av[1]);
 	if (game.map == NULL)
 	{
-		ft_printf("Error: empty\n");
+		ft_printf("Error: not exist file\n");
 		exit(EXIT_FAILURE);
 	}
 	if (check_map(&game) == 0)
@@ -82,4 +82,3 @@ int	main(int ac, char **av)
 	input_control(&game);
 	mlx_loop(game.mlx);
 }
-
