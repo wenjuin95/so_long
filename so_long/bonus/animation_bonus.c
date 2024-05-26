@@ -46,7 +46,7 @@ int	animation(t_data *game)
 		mlx_destroy_image(game->mlx, game->collect);
 		load_image(game);
 		put_to_win(game);
-		game->item_pos++;
+		game->item_pos += 1;
 		game->frame = 0;
 	}
 	return (0);
