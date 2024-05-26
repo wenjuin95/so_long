@@ -81,8 +81,6 @@ int	check_move(t_data *game, int x, int y)
 */
 int	control(int keycode, t_data *game)
 {
-	int	executable;
-
 	if (keycode == ESC || keycode == Q)
 	{
 		ft_printf("\nYou had quit the game\n\n");
@@ -90,14 +88,13 @@ int	control(int keycode, t_data *game)
 		exit(EXIT_SUCCESS);
 	}
 	if (keycode == W)
-		executable = move_up(game, keycode);
+		move_up(game, keycode);
 	if (keycode == S)
-		executable = move_down(game, keycode);
+		move_down(game, keycode);
 	if (keycode == A)
-		executable = move_left(game, keycode);
+		move_left(game, keycode);
 	if (keycode == D)
-		executable = move_right(game, keycode);
-	if (executable == 1)
-		put_to_win(game);
+		move_right(game, keycode);
+	put_to_win(game);
 	return (1);
 }
